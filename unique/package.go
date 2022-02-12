@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-const separator = " "
+const Separator = " "
 
 type Options struct {
 	Count       bool
@@ -16,7 +16,7 @@ type Options struct {
 	NumChars    int
 }
 
-func min(x int, y int) int {
+func Min(x int, y int) int {
 	if x > y {
 		return y
 	} else {
@@ -24,33 +24,33 @@ func min(x int, y int) int {
 	}
 }
 
-func countWords(currentString string, opts Options) string {
-	words := strings.Split(currentString, separator)
-	minWords := min(len(words), opts.NumFields)
-	newString := strings.Join(words[minWords:], separator)
-	minChars := min(len(newString), opts.NumChars)
+func CountWords(currentString string, opts Options) string {
+	words := strings.Split(currentString, Separator)
+	minWords := Min(len(words), opts.NumFields)
+	newString := strings.Join(words[minWords:], Separator)
+	minChars := Min(len(newString), opts.NumChars)
 	return newString[minChars:]
 }
 
-func writer(currentCount int, output *string, row string, opts Options) {
+func Writer(currentCount int, output *string, row string, opts Options) {
 	out := ""
 	if opts.Count {
-		out += strconv.Itoa(currentCount) + separator
+		out += strconv.Itoa(currentCount) + Separator
 	}
 	*output += out + row + "\n"
 }
 func writeRow(output *string, currentCount int, row string, opts Options) {
 	if opts.Uniq {
 		if currentCount == 1 {
-			writer(currentCount, output, row, opts)
+			Writer(currentCount, output, row, opts)
 		}
 	} else if opts.Double && currentCount > 1 || !opts.Double {
-		writer(currentCount, output, row, opts)
+		Writer(currentCount, output, row, opts)
 	}
 }
 
-func toFormat(text string, opts Options) string {
-	formattedText := countWords(text, opts)
+func ToFormat(text string, opts Options) string {
+	formattedText := CountWords(text, opts)
 	if opts.Insensitive {
 		formattedText = strings.ToLower(formattedText)
 	}
@@ -62,8 +62,8 @@ func Uniq(rows *[]string, opts Options) string {
 	currentCount := 1
 	currentRow := (*rows)[0]
 	for idx, nextRow := range (*rows)[1:] {
-		formattedCurrentRow := toFormat(currentRow, opts)
-		formattedNextRow := toFormat(nextRow, opts)
+		formattedCurrentRow := ToFormat(currentRow, opts)
+		formattedNextRow := ToFormat(nextRow, opts)
 		if formattedNextRow == formattedCurrentRow {
 			currentCount++
 		} else {

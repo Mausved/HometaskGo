@@ -1,13 +1,14 @@
-package unique
+package test
 
 import (
+	"github.com/Mausved/uniq/unique"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
 )
 
 func TestWithoutFormatting(t *testing.T) {
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -17,12 +18,12 @@ func TestWithoutFormatting(t *testing.T) {
 	}
 	input := "uniq first row."
 	expected := input
-	assert.Equal(t, expected, toFormat(input, opts))
+	assert.Equal(t, expected, unique.ToFormat(input, opts))
 }
 
 func TestWithCountingFormatting(t *testing.T) {
 	const ignoredWords = 2
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -32,12 +33,12 @@ func TestWithCountingFormatting(t *testing.T) {
 	}
 	input := "in this test will ignored the first two begin words."
 	expected := strings.Join(strings.Split(input, " ")[ignoredWords:], " ")
-	assert.Equal(t, expected, toFormat(input, opts))
+	assert.Equal(t, expected, unique.ToFormat(input, opts))
 }
 
 func TestWithCountingFormattingIgnoredAllWords(t *testing.T) {
 	const ignoredWords = 200
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -47,11 +48,11 @@ func TestWithCountingFormattingIgnoredAllWords(t *testing.T) {
 	}
 	input := "so little words in compared with constant at 39 row..."
 	expected := ""
-	assert.Equal(t, expected, toFormat(input, opts))
+	assert.Equal(t, expected, unique.ToFormat(input, opts))
 }
 
 func TestWithRegisterFormatting(t *testing.T) {
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -61,12 +62,12 @@ func TestWithRegisterFormatting(t *testing.T) {
 	}
 	input := "THIS TEXT WILL BE IN LOWER"
 	expected := strings.ToLower(input)
-	assert.Equal(t, expected, toFormat(input, opts))
+	assert.Equal(t, expected, unique.ToFormat(input, opts))
 }
 
 func TestRegisterAndCountingFormatting(t *testing.T) {
 	const ignoredWords = 5
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -76,5 +77,5 @@ func TestRegisterAndCountingFormatting(t *testing.T) {
 	}
 	input := "IN THIS TEST WILL BE IN LOW AND IGNORED THE FIRST FIVE WORDS"
 	expected := strings.Join(strings.Split(strings.ToLower(input), " ")[ignoredWords:], " ")
-	assert.Equal(t, expected, toFormat(input, opts))
+	assert.Equal(t, expected, unique.ToFormat(input, opts))
 }

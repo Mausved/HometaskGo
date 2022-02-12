@@ -1,12 +1,13 @@
-package unique
+package test
 
 import (
+	"github.com/Mausved/uniq/unique"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestWithoutFields(t *testing.T) {
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -16,11 +17,11 @@ func TestWithoutFields(t *testing.T) {
 	}
 	input := "there're three words."
 	expected := input
-	assert.Equal(t, expected, countWords(input, opts))
+	assert.Equal(t, expected, unique.CountWords(input, opts))
 }
 
 func TestEscape1Word(t *testing.T) {
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -31,11 +32,11 @@ func TestEscape1Word(t *testing.T) {
 	input := "there're three words."
 	expected := "three words."
 
-	assert.Equal(t, expected, countWords(input, opts))
+	assert.Equal(t, expected, unique.CountWords(input, opts))
 }
 
 func TestEscapeAll(t *testing.T) {
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -46,11 +47,11 @@ func TestEscapeAll(t *testing.T) {
 	input := "there're three words."
 	expected := ""
 
-	assert.Equal(t, expected, countWords(input, opts))
+	assert.Equal(t, expected, unique.CountWords(input, opts))
 }
 
 func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
-	opts := Options{
+	opts := unique.Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -61,5 +62,5 @@ func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
 	input := "this test is check correctly behavior NumFields more the number of words in this string."
 	expected := ""
 
-	assert.Equal(t, expected, countWords(input, opts))
+	assert.Equal(t, expected, unique.CountWords(input, opts))
 }
