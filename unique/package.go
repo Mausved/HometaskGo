@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+const separator = " "
+
 type Options struct {
 	Count       bool
 	Double      bool
@@ -23,7 +25,6 @@ func min(x int, y int) int {
 }
 
 func countWords(currentString string, opts Options) string {
-	const separator = " "
 	words := strings.Split(currentString, separator)
 	minWords := min(len(words), opts.NumFields)
 	newString := strings.Join(words[minWords:], separator)
@@ -32,16 +33,13 @@ func countWords(currentString string, opts Options) string {
 }
 
 func writer(currentCount int, output *string, row string, opts Options) {
-	const separator = " "
 	out := ""
 	if opts.Count {
 		out += strconv.Itoa(currentCount) + separator
 	}
 	*output += out + row + "\n"
-
 }
-func writeRowV2(output *string, currentCount int, row string, opts Options) {
-
+func writeRow(output *string, currentCount int, row string, opts Options) {
 	if opts.Uniq {
 		if currentCount == 1 {
 			writer(currentCount, output, row, opts)
@@ -54,7 +52,7 @@ func writeRowV2(output *string, currentCount int, row string, opts Options) {
 func toFormat(text string, opts Options) string {
 	formattedText := countWords(text, opts)
 	if opts.Insensitive {
-		formattedText = strings.ToLower(text)
+		formattedText = strings.ToLower(formattedText)
 	}
 	return formattedText
 }
@@ -69,12 +67,12 @@ func Uniq(rows *[]string, opts Options) string {
 		if formattedNextRow == formattedCurrentRow {
 			currentCount++
 		} else {
-			writeRowV2(&output, currentCount, currentRow, opts)
+			writeRow(&output, currentCount, currentRow, opts)
 			currentRow = nextRow
 			currentCount = 1
 		}
 		if idx+1 == len(*rows)-1 {
-			writeRowV2(&output, currentCount, currentRow, opts)
+			writeRow(&output, currentCount, currentRow, opts)
 		}
 	}
 	return output[:len(output)-1]
