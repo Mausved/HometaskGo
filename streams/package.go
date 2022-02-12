@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func getReadyInput() io.Reader {
+func GetReadyInput() io.Reader {
 	inputFile := flag.Arg(0)
 	if inputFile != "" {
 		f, err := os.Open(inputFile)
@@ -21,7 +21,7 @@ func getReadyInput() io.Reader {
 	return os.Stdin
 }
 
-func getReadyOutput() io.Writer {
+func GetReadyOutput() io.Writer {
 	outputFile := flag.Arg(1)
 	if outputFile != "" {
 		f, err := os.Create(outputFile)
@@ -34,7 +34,7 @@ func getReadyOutput() io.Writer {
 	return os.Stdout
 }
 
-func readAllFile(buffer *bufio.Scanner) []string {
+func ReadAllFile(buffer *bufio.Scanner) []string {
 	var output []string
 	for buffer.Scan() {
 		output = append(output, buffer.Text())

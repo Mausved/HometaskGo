@@ -1,4 +1,4 @@
-package uniq
+package unique
 
 import (
 	"strconv"
