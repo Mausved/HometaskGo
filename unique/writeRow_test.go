@@ -1,14 +1,13 @@
-package test
+package unique
 
 import (
-	"github.com/Mausved/uniq/unique"
 	"github.com/stretchr/testify/assert"
 	"strconv"
 	"testing"
 )
 
 func TestWriteRowWithoutCount(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -19,11 +18,11 @@ func TestWriteRowWithoutCount(t *testing.T) {
 	inputCurrentCount := 1
 	inputRow := "uniq first row."
 	expected := inputRow
-	assert.Equal(t, expected, unique.WriteRow(inputCurrentCount, inputRow, opts))
+	assert.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts))
 }
 
 func TestWriteRowWithCount(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       true,
 		Double:      false,
 		Uniq:        false,
@@ -33,6 +32,6 @@ func TestWriteRowWithCount(t *testing.T) {
 	}
 	inputCurrentCount := 5
 	inputRow := "row with five repeats."
-	expected := strconv.Itoa(inputCurrentCount) + unique.Separator + inputRow
-	assert.Equal(t, expected, unique.WriteRow(inputCurrentCount, inputRow, opts))
+	expected := strconv.Itoa(inputCurrentCount) + Separator + inputRow
+	assert.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts))
 }

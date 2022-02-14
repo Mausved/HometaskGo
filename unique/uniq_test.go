@@ -1,14 +1,13 @@
-package test
+package unique
 
 import (
-	"github.com/Mausved/uniq/unique"
 	"github.com/stretchr/testify/assert"
 	"strings"
 	"testing"
 )
 
 func TestUniqWithoutParams(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -34,11 +33,11 @@ I love music of Kartik.
 Thanks.
 I love music of Kartik.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqWithParamC(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       true,
 		Double:      false,
 		Uniq:        false,
@@ -64,11 +63,11 @@ I love music of Kartik.`
 1 Thanks.
 2 I love music of Kartik.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqWithParamD(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      true,
 		Uniq:        false,
@@ -92,11 +91,11 @@ I love music of Kartik.`
 I love music of Kartik.
 I love music of Kartik.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqWithParamU(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        true,
@@ -119,11 +118,11 @@ I love music of Kartik.`
 		`
 Thanks.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqWithParamI(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -149,11 +148,11 @@ I love MuSIC of Kartik.
 Thanks.
 I love music of kartik.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqWithParamF(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -176,11 +175,11 @@ Thanks.`
 I love music of Kartik.
 Thanks.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqWithParamS(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -204,11 +203,11 @@ I love music of Kartik.
 We love music of Kartik.
 Thanks.`
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqOneRowInput(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       false,
 		Double:      false,
 		Uniq:        false,
@@ -220,11 +219,11 @@ func TestUniqOneRowInput(t *testing.T) {
 	input := "1"
 	expected := "1"
 	inputSlice := strings.Split(input, "\n")
-	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+	assert.Equal(t, expected, Uniq(&inputSlice, opts))
 }
 
 func TestUniqEmptyInput(t *testing.T) {
-	opts := unique.Options{
+	opts := Options{
 		Count:       true,
 		Double:      false,
 		Uniq:        false,
@@ -235,5 +234,5 @@ func TestUniqEmptyInput(t *testing.T) {
 
 	var input []string
 	expected := ""
-	assert.Equal(t, expected, unique.Uniq(&input, opts))
+	assert.Equal(t, expected, Uniq(&input, opts))
 }
