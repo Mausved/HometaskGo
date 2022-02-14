@@ -24,7 +24,7 @@ func Min(x int, y int) int {
 	}
 }
 
-func CountWords(currentString string, opts Options) string {
+func TruncWords(currentString string, opts Options) string {
 	words := strings.Split(currentString, Separator)
 	minWords := Min(len(words), opts.NumFields)
 	newString := strings.Join(words[minWords:], Separator)
@@ -32,38 +32,50 @@ func CountWords(currentString string, opts Options) string {
 	return newString[minChars:]
 }
 
-func Writer(currentCount int, output *string, row string, opts Options) {
+func WriteRow(currentCount int, row string, opts Options) string {
 	out := ""
 	if opts.Count {
-		out += strconv.Itoa(currentCount) + Separator
+		out = strconv.Itoa(currentCount) + Separator
 	}
-	*output += out + row + "\n"
+	return out + row
 }
-func writeRow(output *string, currentCount int, row string, opts Options) {
+
+func Write(output *[]string, currentCount int, row string, opts Options) {
 	if opts.Uniq {
 		if currentCount == 1 {
-			Writer(currentCount, output, row, opts)
+			*output = append(*output, WriteRow(currentCount, row, opts))
+
 		}
 	} else if opts.Double && currentCount > 1 || !opts.Double {
-		Writer(currentCount, output, row, opts)
+		*output = append(*output, WriteRow(currentCount, row, opts))
 	}
 }
 
 func Uniq(rows *[]string, opts Options) string {
-	output := ""
+	if len(*rows) == 0 {
+		return ""
+	}
+
+	output := make([]string, 0, len(*rows))
 	currentCount := 1
 	currentRow := (*rows)[0]
+
+	if len(*rows) == 1 {
+		Write(&output, currentCount, currentRow, opts)
+		return strings.Join(output, "\n")
+	}
+
 	for idx, nextRow := range (*rows)[1:] {
-		if strings.EqualFold(CountWords(nextRow, opts), CountWords(currentRow, opts)) {
+		if strings.EqualFold(TruncWords(nextRow, opts), TruncWords(currentRow, opts)) {
 			currentCount++
 		} else {
-			writeRow(&output, currentCount, currentRow, opts)
+			Write(&output, currentCount, currentRow, opts)
 			currentRow = nextRow
 			currentCount = 1
 		}
 		if idx+1 == len(*rows)-1 {
-			writeRow(&output, currentCount, currentRow, opts)
+			Write(&output, currentCount, currentRow, opts)
 		}
 	}
-	return output[:len(output)-1]
+	return strings.Join(output, "\n")
 }

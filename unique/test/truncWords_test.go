@@ -17,10 +17,10 @@ func TestWithoutFields(t *testing.T) {
 	}
 	input := "there're three words."
 	expected := input
-	assert.Equal(t, expected, unique.CountWords(input, opts))
+	assert.Equal(t, expected, unique.TruncWords(input, opts))
 }
 
-func TestEscape1Word(t *testing.T) {
+func TestTrunc1Word(t *testing.T) {
 	opts := unique.Options{
 		Count:       false,
 		Double:      false,
@@ -32,10 +32,10 @@ func TestEscape1Word(t *testing.T) {
 	input := "there're three words."
 	expected := "three words."
 
-	assert.Equal(t, expected, unique.CountWords(input, opts))
+	assert.Equal(t, expected, unique.TruncWords(input, opts))
 }
 
-func TestEscapeAll(t *testing.T) {
+func TestTruncAll(t *testing.T) {
 	opts := unique.Options{
 		Count:       false,
 		Double:      false,
@@ -47,7 +47,7 @@ func TestEscapeAll(t *testing.T) {
 	input := "there're three words."
 	expected := ""
 
-	assert.Equal(t, expected, unique.CountWords(input, opts))
+	assert.Equal(t, expected, unique.TruncWords(input, opts))
 }
 
 func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
@@ -62,5 +62,5 @@ func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
 	input := "this test is check correctly behavior NumFields more the number of words in this string."
 	expected := ""
 
-	assert.Equal(t, expected, unique.CountWords(input, opts))
+	assert.Equal(t, expected, unique.TruncWords(input, opts))
 }

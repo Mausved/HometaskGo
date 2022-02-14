@@ -31,7 +31,7 @@ func main() {
 
 	errFlush := output.Flush()
 	if errFlush != nil {
-		fmt.Println("Error due to flush: err: ", errFlush)
+		fmt.Println("Error to flush: err: ", errFlush)
 		os.Exit(1)
 	}
 }

@@ -17,11 +17,9 @@ func TestWriteRowWithoutCount(t *testing.T) {
 		NumChars:    0,
 	}
 	inputCurrentCount := 1
-	textResult := ""
 	inputRow := "uniq first row."
-	expected := inputRow + "\n"
-	unique.Writer(inputCurrentCount, &textResult, inputRow, opts)
-	assert.Equal(t, expected, textResult)
+	expected := inputRow
+	assert.Equal(t, expected, unique.WriteRow(inputCurrentCount, inputRow, opts))
 }
 
 func TestWriteRowWithCount(t *testing.T) {
@@ -34,9 +32,7 @@ func TestWriteRowWithCount(t *testing.T) {
 		NumChars:    0,
 	}
 	inputCurrentCount := 5
-	textResult := ""
 	inputRow := "row with five repeats."
-	expected := strconv.Itoa(inputCurrentCount) + unique.Separator + inputRow + "\n"
-	unique.Writer(inputCurrentCount, &textResult, inputRow, opts)
-	assert.Equal(t, expected, textResult)
+	expected := strconv.Itoa(inputCurrentCount) + unique.Separator + inputRow
+	assert.Equal(t, expected, unique.WriteRow(inputCurrentCount, inputRow, opts))
 }

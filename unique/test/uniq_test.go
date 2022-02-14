@@ -206,3 +206,34 @@ Thanks.`
 	inputSlice := strings.Split(input, "\n")
 	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
 }
+
+func TestUniqOneRowInput(t *testing.T) {
+	opts := unique.Options{
+		Count:       false,
+		Double:      false,
+		Uniq:        false,
+		Insensitive: false,
+		NumFields:   0,
+		NumChars:    0,
+	}
+
+	input := "1"
+	expected := "1"
+	inputSlice := strings.Split(input, "\n")
+	assert.Equal(t, expected, unique.Uniq(&inputSlice, opts))
+}
+
+func TestUniqEmptyInput(t *testing.T) {
+	opts := unique.Options{
+		Count:       true,
+		Double:      false,
+		Uniq:        false,
+		Insensitive: false,
+		NumFields:   0,
+		NumChars:    0,
+	}
+
+	var input []string
+	expected := ""
+	assert.Equal(t, expected, unique.Uniq(&input, opts))
+}
