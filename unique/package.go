@@ -49,22 +49,20 @@ func writeRow(output *string, currentCount int, row string, opts Options) {
 	}
 }
 
-func ToFormat(text string, opts Options) string {
-	formattedText := CountWords(text, opts)
-	if opts.Insensitive {
-		formattedText = strings.ToLower(formattedText)
-	}
-	return formattedText
-}
+//func ToFormat(text string, opts Options) string {
+//	formattedText := CountWords(text, opts)
+//	if opts.Insensitive {
+//		formattedText = strings.ToLower(formattedText)
+//	}
+//	return formattedText
+//}
 
 func Uniq(rows *[]string, opts Options) string {
 	output := ""
 	currentCount := 1
 	currentRow := (*rows)[0]
 	for idx, nextRow := range (*rows)[1:] {
-		formattedCurrentRow := ToFormat(currentRow, opts)
-		formattedNextRow := ToFormat(nextRow, opts)
-		if formattedNextRow == formattedCurrentRow {
+		if strings.EqualFold(CountWords(nextRow, opts), CountWords(currentRow, opts)) {
 			currentCount++
 		} else {
 			writeRow(&output, currentCount, currentRow, opts)
