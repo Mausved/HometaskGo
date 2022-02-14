@@ -49,14 +49,6 @@ func writeRow(output *string, currentCount int, row string, opts Options) {
 	}
 }
 
-//func ToFormat(text string, opts Options) string {
-//	formattedText := CountWords(text, opts)
-//	if opts.Insensitive {
-//		formattedText = strings.ToLower(formattedText)
-//	}
-//	return formattedText
-//}
-
 func Uniq(rows *[]string, opts Options) string {
 	output := ""
 	currentCount := 1
