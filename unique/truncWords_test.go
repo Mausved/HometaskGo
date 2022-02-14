@@ -1,11 +1,12 @@
 package unique
 
 import (
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"testing"
 )
 
 func TestWithoutFields(t *testing.T) {
+	const message = "Do not trunc text."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -16,10 +17,11 @@ func TestWithoutFields(t *testing.T) {
 	}
 	input := "there're three words."
 	expected := input
-	assert.Equal(t, expected, TruncWords(input, opts))
+	require.Equal(t, expected, TruncWords(input, opts), message)
 }
 
 func TestTrunc1Word(t *testing.T) {
+	const message = "Test with only one word trunc."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -31,10 +33,11 @@ func TestTrunc1Word(t *testing.T) {
 	input := "there're three words."
 	expected := "three words."
 
-	assert.Equal(t, expected, TruncWords(input, opts))
+	require.Equal(t, expected, TruncWords(input, opts), message)
 }
 
 func TestTruncAll(t *testing.T) {
+	const message = "Test with num fields equal to number of words in text."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -46,10 +49,11 @@ func TestTruncAll(t *testing.T) {
 	input := "there're three words."
 	expected := ""
 
-	assert.Equal(t, expected, TruncWords(input, opts))
+	require.Equal(t, expected, TruncWords(input, opts), message)
 }
 
 func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
+	const message = "Test with num fields more than number of words in input text."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -61,5 +65,5 @@ func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
 	input := "this test is check correctly behavior NumFields more the number of words in this string."
 	expected := ""
 
-	assert.Equal(t, expected, TruncWords(input, opts))
+	require.Equal(t, expected, TruncWords(input, opts), message)
 }

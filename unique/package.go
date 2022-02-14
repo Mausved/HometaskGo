@@ -32,22 +32,21 @@ func TruncWords(currentString string, opts Options) string {
 	return newString[minChars:]
 }
 
-func WriteRow(currentCount int, row string, opts Options) string {
+func WriteRow(currentCount int, currentRow string, opts Options) string {
 	out := ""
 	if opts.Count {
 		out = strconv.Itoa(currentCount) + Separator
 	}
-	return out + row
+	return out + currentRow
 }
 
-func Write(output *[]string, currentCount int, row string, opts Options) {
+func Append(result *[]string, currentCount int, currentRow string, opts Options) {
 	if opts.Uniq {
 		if currentCount == 1 {
-			*output = append(*output, WriteRow(currentCount, row, opts))
-
+			*result = append(*result, WriteRow(currentCount, currentRow, opts))
 		}
-	} else if opts.Double && currentCount > 1 || !opts.Double {
-		*output = append(*output, WriteRow(currentCount, row, opts))
+	} else if !opts.Double || opts.Double && currentCount > 1 {
+		*result = append(*result, WriteRow(currentCount, currentRow, opts))
 	}
 }
 
@@ -56,26 +55,26 @@ func Uniq(rows *[]string, opts Options) string {
 		return ""
 	}
 
-	output := make([]string, 0, len(*rows))
+	result := make([]string, 0, len(*rows))
 	currentCount := 1
 	currentRow := (*rows)[0]
 
 	if len(*rows) == 1 {
-		Write(&output, currentCount, currentRow, opts)
-		return strings.Join(output, "\n")
+		Append(&result, currentCount, currentRow, opts)
+		return result[0]
 	}
 
 	for idx, nextRow := range (*rows)[1:] {
 		if strings.EqualFold(TruncWords(nextRow, opts), TruncWords(currentRow, opts)) {
 			currentCount++
 		} else {
-			Write(&output, currentCount, currentRow, opts)
+			Append(&result, currentCount, currentRow, opts)
 			currentRow = nextRow
 			currentCount = 1
 		}
 		if idx+1 == len(*rows)-1 {
-			Write(&output, currentCount, currentRow, opts)
+			Append(&result, currentCount, currentRow, opts)
 		}
 	}
-	return strings.Join(output, "\n")
+	return strings.Join(result, "\n")
 }

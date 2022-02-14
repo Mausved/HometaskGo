@@ -23,7 +23,8 @@ func main() {
 	output := bufio.NewWriter(streams.GetReadyOutput())
 	text := streams.ReadAllFile(buffer)
 
-	_, err := output.WriteString(unique.Uniq(&text, opts))
+	result := unique.Uniq(&text, opts)
+	_, err := output.WriteString(result)
 	if err != nil {
 		fmt.Println("Error to writing to output: err: ", err)
 		os.Exit(1)

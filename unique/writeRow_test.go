@@ -1,12 +1,13 @@
 package unique
 
 import (
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"strconv"
 	"testing"
 )
 
 func TestWriteRowWithoutCount(t *testing.T) {
+	const message = "Test without print counts."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -18,10 +19,11 @@ func TestWriteRowWithoutCount(t *testing.T) {
 	inputCurrentCount := 1
 	inputRow := "uniq first row."
 	expected := inputRow
-	assert.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts))
+	require.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts), message)
 }
 
 func TestWriteRowWithCount(t *testing.T) {
+	const message = "Test with print counts."
 	opts := Options{
 		Count:       true,
 		Double:      false,
@@ -33,5 +35,5 @@ func TestWriteRowWithCount(t *testing.T) {
 	inputCurrentCount := 5
 	inputRow := "row with five repeats."
 	expected := strconv.Itoa(inputCurrentCount) + Separator + inputRow
-	assert.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts))
+	require.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts), message)
 }

@@ -1,11 +1,12 @@
 package unique
 
 import (
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"testing"
 )
 
 func TestWriteWithoutParams(t *testing.T) {
+	const message = "Test without params."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -18,11 +19,12 @@ func TestWriteWithoutParams(t *testing.T) {
 	inputRow := "uniq first row."
 	var output []string
 	expected := append(output, inputRow)
-	Write(&output, inputCurrentCount, inputRow, opts)
-	assert.Equal(t, expected, output)
+	Append(&output, inputCurrentCount, inputRow, opts)
+	require.Equal(t, expected, output, message)
 }
 
 func TestWriteWithUniqParamNotUniqRow(t *testing.T) {
+	const message = "Test with uniq param. Not uniq input row."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -35,11 +37,12 @@ func TestWriteWithUniqParamNotUniqRow(t *testing.T) {
 	inputRow := "not uniq row."
 	var output []string
 	var expected []string
-	Write(&output, inputCurrentCount, inputRow, opts)
-	assert.Equal(t, expected, output)
+	Append(&output, inputCurrentCount, inputRow, opts)
+	require.Equal(t, expected, output, message)
 }
 
 func TestWriteWithUniqParamUniqRow(t *testing.T) {
+	const message = "Test with uniq param. Uniq input row."
 	opts := Options{
 		Count:       false,
 		Double:      false,
@@ -52,11 +55,12 @@ func TestWriteWithUniqParamUniqRow(t *testing.T) {
 	inputRow := "uniq row."
 	var output []string
 	expected := append(output, inputRow)
-	Write(&output, inputCurrentCount, inputRow, opts)
-	assert.Equal(t, expected, output)
+	Append(&output, inputCurrentCount, inputRow, opts)
+	require.Equal(t, expected, output, message)
 }
 
 func TestWriteWithDoubleParamNotDoubleRow(t *testing.T) {
+	const message = "Test with double param. Not double input row."
 	opts := Options{
 		Count:       false,
 		Double:      true,
@@ -69,11 +73,12 @@ func TestWriteWithDoubleParamNotDoubleRow(t *testing.T) {
 	inputRow := "uniq row."
 	var output []string
 	var expected []string
-	Write(&output, inputCurrentCount, inputRow, opts)
-	assert.Equal(t, expected, output)
+	Append(&output, inputCurrentCount, inputRow, opts)
+	require.Equal(t, expected, output, message)
 }
 
 func TestWriteWithDoubleParamDoubleRow(t *testing.T) {
+	const message = "Test with double row. Double input row."
 	opts := Options{
 		Count:       false,
 		Double:      true,
@@ -86,6 +91,6 @@ func TestWriteWithDoubleParamDoubleRow(t *testing.T) {
 	inputRow := "not uniq row."
 	var output []string
 	expected := append(output, inputRow)
-	Write(&output, inputCurrentCount, inputRow, opts)
-	assert.Equal(t, expected, output)
+	Append(&output, inputCurrentCount, inputRow, opts)
+	require.Equal(t, expected, output, message)
 }
