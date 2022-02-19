@@ -12,7 +12,6 @@ func Calculator(input string) float64 {
 	if err != nil || isRestricted || formatted == "" {
 		return math.NaN()
 	}
-	//fmt.Println(fo)
 	stringStack := stack.Stack{}
 	var polish []string
 	for i := 0; i < len(formatted); {
@@ -36,11 +35,11 @@ func Calculator(input string) float64 {
 		polish = append(polish, stringStack.GetTop().(string))
 		stringStack.Pop()
 	}
-	return CountReversePolishNotation(&polish)
+	return math.Round(CountReversePolishNotation(&polish)*100) / 100
 }
 
 const (
-	restrictedSymbols        = "a-zA-Z,!@#$%^&~=/|\\;:<>?"
+	restrictedSymbols        = "a-zA-Z,!@#$%^&~=|\\;:<>?"
 	restrictedSymbolsPattern = "[" + restrictedSymbols + "]"
 	minus                    = "-"
 	plus                     = "+"

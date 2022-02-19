@@ -14,6 +14,9 @@ func getOperation(x float64, y float64, operator string) float64 {
 	case "*":
 		return x * y
 	case "/":
+		if y == 0 {
+			return math.NaN()
+		}
 		return x / y
 	default:
 		return math.NaN()
