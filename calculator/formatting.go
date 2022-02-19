@@ -1,14 +1,9 @@
 package calculator
 
 import (
+	"fmt"
 	"strings"
 )
-
-func checkMinus(operator *string, quantity int) {
-	if *operator == minus && quantity%2 == 0 {
-		*operator = plus
-	}
-}
 
 func checkLast(lastSymbol string, operator string) string {
 	checked := ""
@@ -31,21 +26,20 @@ func checkLast(lastSymbol string, operator string) string {
 func toFormat(str *string) string {
 	brackets := 0
 	currOperator := ""
-	countCurrOperator := 0
 	format := ""
-	for _, symbol := range strings.Split(*str, "") {
+	slice := strings.Split(*str, "")
+	fmt.Println(*str)
+	for idx, symbol := range slice {
 		if isOperator(symbol) {
 			operator := symbol
-			if currOperator == symbol {
-				countCurrOperator++
-			} else {
-				checkMinus(&currOperator, countCurrOperator)
+			if idx-1 > 0 && isOperator(slice[idx-1]) {
+				return ""
+			}
+			if currOperator != symbol {
 				format += currOperator
 				currOperator = operator
-				countCurrOperator = 1
 			}
 		} else {
-			checkMinus(&currOperator, countCurrOperator)
 			if len(format) > 0 {
 				lastSymbol := format[len(format)-1]
 				format += checkLast(string(lastSymbol), currOperator)
@@ -53,9 +47,11 @@ func toFormat(str *string) string {
 			format += currOperator + symbol
 
 			currOperator = ""
-			countCurrOperator = 0
 
 			if isOpenBracket(symbol) {
+				if idx-1 > 0 && isDigit(slice[idx-1]) {
+					return ""
+				}
 				brackets++
 			} else if isCloseBracket(symbol) {
 				brackets--
@@ -68,5 +64,6 @@ func toFormat(str *string) string {
 	if brackets != 0 {
 		return ""
 	}
+	fmt.Println("formatted=", format)
 	return format
 }

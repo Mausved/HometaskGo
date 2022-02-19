@@ -20,5 +20,5 @@ func TestInitDiv(t *testing.T) {
 func TestNaNDiv(t *testing.T) {
 	require.Equal(t, true, math.IsNaN(Calculator("2/0")), "2/0=NaN")
 	require.Equal(t, true, math.IsNaN(Calculator("-2/0")), "-2/0=NaN")
-	require.Equal(t, false, math.IsNaN(Calculator("2/-2")), "2/-2=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("2/-2")), "2/-2=NaN")
 }

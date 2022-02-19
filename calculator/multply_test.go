@@ -2,6 +2,7 @@ package calculator
 
 import (
 	"github.com/stretchr/testify/require"
+	"math"
 	"testing"
 )
 
@@ -16,19 +17,12 @@ func TestStandardMultiply(t *testing.T) {
 	require.Equal(t, 120., Calculator("1*2*3*4*5"), "1*2*3*4*5=120")
 }
 
-func TestRemoveDoublesMultiply(t *testing.T) {
-	require.Equal(t, 12345., Calculator("12345"), "12345")
-}
-
 func TestNaNMultiply(t *testing.T) {
-	//require.Equal(t, true, math.IsNaN(Calculator("2*-2")), "2*-2=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("2*---2")), "2*---2=2*-2=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("0.1****3")), "0.1****3=0.1*3=0.3")
-	//require.Equal(t, true, math.IsNaN(Calculator("2****3")), "2****3=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("2**0**3")), "2**0**3=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("2*0**3")), "2*0**3=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("12345")), "12345")
-	//require.Equal(t, true, math.IsNaN(Calculator("2****3")), "2****3=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("2*-2")), "2*-2=NaN")
-	//require.Equal(t, true, math.IsNaN(Calculator("2*-2")), "2*-2=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("2*---2")), "2*---2=2*-2=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("0.1****3")), "0.1****3=0.1*3=0.3")
+	require.Equal(t, true, math.IsNaN(Calculator("2****3")), "2****3=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("2**0**3")), "2**0**3=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("2*0**3")), "2*0**3=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("2****3")), "2****3=NaN")
+	require.Equal(t, true, math.IsNaN(Calculator("2*-2")), "2*-2=NaN")
 }
