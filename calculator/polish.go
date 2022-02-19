@@ -1,7 +1,7 @@
 package calculator
 
 import (
-	"github.com/Mausved/uniq/stack"
+	"github.com/Mausved/calculator/stack"
 	"strconv"
 	"strings"
 )

@@ -1,4 +1,4 @@
-module github.com/Mausved/uniq
+module github.com/Mausved/calculator
 
 go 1.17
 

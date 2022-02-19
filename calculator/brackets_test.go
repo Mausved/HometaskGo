@@ -15,7 +15,6 @@ func TestOkBrackets(t *testing.T) {
 	require.Equal(t, 0., Calculator("(2)-2"), "(2)-2 = 0")
 	require.Equal(t, 0., Calculator("-(2)+2"), "-(2)+2 = 0")
 	require.Equal(t, 0., Calculator("(-2)+2"), "(-2)+2 = 0")
-
 }
 
 func TestInvalidBrackets(t *testing.T) {
