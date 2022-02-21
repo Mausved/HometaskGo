@@ -2,6 +2,7 @@ package calculator
 
 import (
 	"github.com/Mausved/calculator/stack"
+	"github.com/cstockton/go-conv"
 	"math"
 	"regexp"
 )
@@ -39,7 +40,7 @@ func Calculator(input string) float64 {
 }
 
 const (
-	restrictedSymbols        = "a-zA-Z,!@#$%^&~=|\\;:<>?"
+	restrictedSymbols        = "a-zA-Z,!@#$%^&~=|\\;:<>?_ "
 	restrictedSymbolsPattern = "[" + restrictedSymbols + "]"
 	minus                    = "-"
 	plus                     = "+"
@@ -54,11 +55,11 @@ const (
 )
 
 func Sum(operands ...interface{}) float64 {
-	result := float64(0)
+	result := 0.
 	for _, number := range operands {
-		val, ok := number.(float64)
-		if !ok {
-			val = 0
+		val, err := conv.Float64(number)
+		if err != nil {
+			return math.NaN()
 		}
 		result += val
 	}
