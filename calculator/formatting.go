@@ -5,19 +5,8 @@ import (
 )
 
 func checkLast(lastSymbol string, operator string) string {
-	checked := ""
-	if isOperator(lastSymbol) {
-		checked = lastSymbol
-	} else if isOpenBracket(lastSymbol) {
-		checked = operator
-	}
-	if isOperator(lastSymbol) || isOpenBracket(lastSymbol) {
-		switch checked {
-		case minus, plus:
-			return "0"
-		case multiply, div:
-			return "1"
-		}
+	if operator == minus && !isDigit(lastSymbol) {
+		return "0"
 	}
 	return ""
 }
