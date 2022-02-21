@@ -6,15 +6,8 @@ import (
 	"testing"
 )
 
-func TestSums(t *testing.T) {
-	require.Equal(t, float64(-2), Calculator("-2"), "-2=-2")
-	require.Equal(t, float64(0), Calculator("(-2)+2"), "-2+2=0")
-	require.Equal(t, float64(0), Calculator("2+(-2)"), "2-2=0")
-
-}
-
-func TestNanSums(t *testing.T) {
-	require.Equal(t, true, math.IsNaN(Calculator("2+-2")), "2/0=NaN")
-	require.Equal(t, true, math.IsNaN(Calculator("2--2")), "2--2=NaN")
-	require.Equal(t, true, math.IsNaN(Calculator("2---2")), "2---2=NaN")
+func TestSum(t *testing.T) {
+	require.Equal(t, 1., Sum(0, 0., 0, 1.))
+	require.Equal(t, 15., Sum(1, 2, 3, 4, 5))
+	require.Equal(t, true, math.IsNaN(Sum(1, 2, 3, 4., "not number")))
 }
