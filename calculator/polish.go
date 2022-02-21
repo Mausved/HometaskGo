@@ -37,12 +37,10 @@ func makeNumber(str string) string {
 }
 
 func makeOperator(operator string, polish *[]string, stringStack *stack.Stack) {
-	if !stringStack.IsEmpty() {
+	for !stringStack.IsEmpty() && getPriority(stringStack.GetTop().(string)) >= getPriority(operator) {
 		top := stringStack.GetTop().(string)
-		for !stringStack.IsEmpty() && getPriority(top) >= getPriority(operator) {
-			*polish = append(*polish, top)
-			stringStack.Pop()
-		}
+		*polish = append(*polish, top)
+		stringStack.Pop()
 	}
 	stringStack.Push(operator)
 }
