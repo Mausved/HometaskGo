@@ -24,7 +24,7 @@ func (stack *Stack) GetTop() interface{} {
 	return (*stack)[stack.size()-1]
 }
 
-// will be zero-size Stack
+// PourStackToSlice will be zero-size Stack
 func (stack *Stack) PourStackToSlice() []interface{} {
 	var slice []interface{}
 	for !stack.IsEmpty() {
