@@ -2,7 +2,10 @@ module github.com/Mausved/calculator
 
 go 1.17
 
-require github.com/stretchr/testify v1.7.0
+require (
+	github.com/cstockton/go-conv v1.0.0
+	github.com/stretchr/testify v1.7.0
+)
 
 require (
 	github.com/davecgh/go-spew v1.1.0 // indirect
