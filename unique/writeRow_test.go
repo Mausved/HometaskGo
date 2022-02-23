@@ -19,7 +19,7 @@ func TestWriteRowWithoutCount(t *testing.T) {
 	inputCurrentCount := 1
 	inputRow := "uniq first row."
 	expected := inputRow
-	require.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts), message)
+	require.Equal(t, expected, writeRow(inputCurrentCount, inputRow, opts), message)
 }
 
 func TestWriteRowWithCount(t *testing.T) {
@@ -35,5 +35,5 @@ func TestWriteRowWithCount(t *testing.T) {
 	inputCurrentCount := 5
 	inputRow := "row with five repeats."
 	expected := strconv.Itoa(inputCurrentCount) + Separator + inputRow
-	require.Equal(t, expected, WriteRow(inputCurrentCount, inputRow, opts), message)
+	require.Equal(t, expected, writeRow(inputCurrentCount, inputRow, opts), message)
 }

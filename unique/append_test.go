@@ -19,8 +19,7 @@ func TestWriteWithoutParams(t *testing.T) {
 	inputRow := "uniq first row."
 	var output []string
 	expected := append(output, inputRow)
-	Append(&output, inputCurrentCount, inputRow, opts)
-	require.Equal(t, expected, output, message)
+	require.Equal(t, expected, addRow(output, inputCurrentCount, inputRow, opts), message)
 }
 
 func TestWriteWithUniqParamNotUniqRow(t *testing.T) {
@@ -37,8 +36,7 @@ func TestWriteWithUniqParamNotUniqRow(t *testing.T) {
 	inputRow := "not uniq row."
 	var output []string
 	var expected []string
-	Append(&output, inputCurrentCount, inputRow, opts)
-	require.Equal(t, expected, output, message)
+	require.Equal(t, expected, addRow(output, inputCurrentCount, inputRow, opts), message)
 }
 
 func TestWriteWithUniqParamUniqRow(t *testing.T) {
@@ -55,8 +53,7 @@ func TestWriteWithUniqParamUniqRow(t *testing.T) {
 	inputRow := "uniq row."
 	var output []string
 	expected := append(output, inputRow)
-	Append(&output, inputCurrentCount, inputRow, opts)
-	require.Equal(t, expected, output, message)
+	require.Equal(t, expected, addRow(output, inputCurrentCount, inputRow, opts), message)
 }
 
 func TestWriteWithDoubleParamNotDoubleRow(t *testing.T) {
@@ -73,8 +70,7 @@ func TestWriteWithDoubleParamNotDoubleRow(t *testing.T) {
 	inputRow := "uniq row."
 	var output []string
 	var expected []string
-	Append(&output, inputCurrentCount, inputRow, opts)
-	require.Equal(t, expected, output, message)
+	require.Equal(t, expected, addRow(output, inputCurrentCount, inputRow, opts), message)
 }
 
 func TestWriteWithDoubleParamDoubleRow(t *testing.T) {
@@ -91,6 +87,5 @@ func TestWriteWithDoubleParamDoubleRow(t *testing.T) {
 	inputRow := "not uniq row."
 	var output []string
 	expected := append(output, inputRow)
-	Append(&output, inputCurrentCount, inputRow, opts)
-	require.Equal(t, expected, output, message)
+	require.Equal(t, expected, addRow(output, inputCurrentCount, inputRow, opts), message)
 }
