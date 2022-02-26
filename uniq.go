@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"github.com/Mausved/uniq/streams"
 	"github.com/Mausved/uniq/unique"
-	"os"
 )
 
 var opts unique.Options
@@ -15,7 +14,7 @@ func main() {
 	flag.Parse()
 	if opts.Uniq && opts.Double || opts.Uniq && opts.Count || opts.Double && opts.Count {
 		flag.PrintDefaults()
-		os.Exit(1)
+		return
 	}
 
 	// prepare buffers
@@ -23,17 +22,17 @@ func main() {
 	output := bufio.NewWriter(streams.GetReadyOutput())
 	text := streams.ReadAllFile(buffer)
 
-	result := unique.Uniq(&text, opts)
+	result := unique.Uniq(text, opts)
 	_, err := output.WriteString(result)
 	if err != nil {
 		fmt.Println("Error to writing to output: err: ", err)
-		os.Exit(1)
+
 	}
 
 	errFlush := output.Flush()
 	if errFlush != nil {
 		fmt.Println("Error to flush: err: ", errFlush)
-		os.Exit(1)
+		return
 	}
 }
 
