@@ -32,7 +32,7 @@ func makeNumber(str string) string {
 	if nextNotDigitPos == -1 {
 		nextNotDigitPos = len(str)
 	}
-	number := str[0:nextNotDigitPos]
+	number := str[:nextNotDigitPos]
 	return number
 }
 
