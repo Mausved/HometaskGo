@@ -27,12 +27,14 @@ I love music of Kartik.
 Thanks.
 I love music of Kartik.
 I love music of Kartik.`
-	expected :=
-		`I love music.
+	expected := []string{
+		`I love music.`,
+		``,
+		`I love music of Kartik.`,
+		`Thanks.`,
+		`I love music of Kartik.`,
+	}
 
-I love music of Kartik.
-Thanks.
-I love music of Kartik.`
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -58,12 +60,14 @@ I love music of Kartik.
 Thanks.
 I love music of Kartik.
 I love music of Kartik.`
-	expected :=
-		`3 I love music.
-1 
-2 I love music of Kartik.
-1 Thanks.
-2 I love music of Kartik.`
+	expected := []string{
+		`3 I love music.`,
+		`1 `,
+		`2 I love music of Kartik.`,
+		`1 Thanks.`,
+		`2 I love music of Kartik.`,
+	}
+
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -89,10 +93,12 @@ I love music of Kartik.
 Thanks.
 I love music of Kartik.
 I love music of Kartik.`
-	expected :=
-		`I love music.
-I love music of Kartik.
-I love music of Kartik.`
+	expected := []string{
+		`I love music.`,
+		`I love music of Kartik.`,
+		`I love music of Kartik.`,
+	}
+
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -118,9 +124,11 @@ I love music of Kartik.
 Thanks.
 I love music of Kartik.
 I love music of Kartik.`
-	expected :=
-		`
-Thanks.`
+	expected := []string{
+		``,
+		`Thanks.`,
+	}
+
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -146,12 +154,14 @@ I love music of kartik.
 Thanks.
 I love music of kartik.
 I love MuSIC of Kartik.`
-	expected :=
-		`I LOVE MUSIC.
+	expected := []string{
+		`I LOVE MUSIC.`,
+		``,
+		`I love MuSIC of Kartik.`,
+		`Thanks.`,
+		`I love music of kartik.`,
+	}
 
-I love MuSIC of Kartik.
-Thanks.
-I love music of kartik.`
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -175,11 +185,12 @@ They love music.
 I love music of Kartik.
 We love music of Kartik.
 Thanks.`
-	expected :=
-		`We love music.
-
-I love music of Kartik.
-Thanks.`
+	expected := []string{
+		`We love music.`,
+		``,
+		`I love music of Kartik.`,
+		`Thanks.`,
+	}
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -203,12 +214,13 @@ C love music.
 I love music of Kartik.
 We love music of Kartik.
 Thanks.`
-	expected :=
-		`I love music.
-
-I love music of Kartik.
-We love music of Kartik.
-Thanks.`
+	expected := []string{
+		`I love music.`,
+		``,
+		`I love music of Kartik.`,
+		`We love music of Kartik.`,
+		`Thanks.`,
+	}
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -225,7 +237,7 @@ func TestUniqOneRowInput(t *testing.T) {
 	}
 
 	input := "1"
-	expected := "1"
+	expected := []string{"1"}
 	inputSlice := strings.Split(input, "\n")
 	require.Equal(t, expected, Uniq(inputSlice, opts), message)
 }
@@ -242,6 +254,6 @@ func TestUniqEmptyInput(t *testing.T) {
 	}
 
 	var input []string
-	expected := ""
+	var expected []string = nil
 	require.Equal(t, expected, Uniq(input, opts), message)
 }

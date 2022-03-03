@@ -51,9 +51,9 @@ func addRow(result []string, currentCount int, currentRow string, opts Options) 
 	return result
 }
 
-func Uniq(rows []string, opts Options) string {
+func Uniq(rows []string, opts Options) []string {
 	if len(rows) == 0 {
-		return ""
+		return nil
 	}
 
 	result := make([]string, 0, len(rows))
@@ -62,7 +62,7 @@ func Uniq(rows []string, opts Options) string {
 
 	if len(rows) == 1 {
 		result = addRow(result, currentCount, currentRow, opts)
-		return result[0]
+		return result
 	}
 
 	for idx, nextRow := range rows[1:] {
@@ -77,5 +77,5 @@ func Uniq(rows []string, opts Options) string {
 			result = addRow(result, currentCount, currentRow, opts)
 		}
 	}
-	return strings.Join(result, "\n")
+	return result
 }

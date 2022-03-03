@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/Mausved/uniq/streams"
 	"github.com/Mausved/uniq/unique"
+	"strings"
 )
 
 var opts unique.Options
@@ -23,7 +24,7 @@ func main() {
 	text := streams.ReadAllFile(buffer)
 
 	result := unique.Uniq(text, opts)
-	_, err := output.WriteString(result)
+	_, err := output.WriteString(strings.Join(result, "\n"))
 	if err != nil {
 		fmt.Println("Error to writing to output: err: ", err)
 
