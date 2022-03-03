@@ -16,7 +16,7 @@ type Options struct {
 	NumChars    int
 }
 
-func Min(x int, y int) int {
+func min(x int, y int) int {
 	if x > y {
 		return y
 	} else {
@@ -26,9 +26,9 @@ func Min(x int, y int) int {
 
 func truncWords(currentString string, opts Options) string {
 	words := strings.Split(currentString, Separator)
-	minWords := Min(len(words), opts.NumFields)
+	minWords := min(len(words), opts.NumFields)
 	newString := strings.Join(words[minWords:], Separator)
-	minChars := Min(len(newString), opts.NumChars)
+	minChars := min(len(newString), opts.NumChars)
 	return newString[minChars:]
 }
 
