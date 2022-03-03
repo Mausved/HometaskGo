@@ -20,7 +20,7 @@ func toFormat(str *string) string {
 		if isOperator(word) {
 			currOperator := word
 			if idx-1 > 0 && isOperator(slice[idx-1]) {
-				return ""
+				return false, ""
 			}
 			if prevOperator != word {
 				format += prevOperator
@@ -35,19 +35,19 @@ func toFormat(str *string) string {
 			prevOperator = ""
 			if isOpenBracket(word) {
 				if idx-1 > 0 && isDigit(slice[idx-1]) {
-					return ""
+					return false, ""
 				}
 				brackets++
 			} else if isCloseBracket(word) {
 				brackets--
 			}
 			if brackets < 0 {
-				return ""
+				return false, ""
 			}
 		}
 	}
 	if brackets != 0 {
-		return ""
+		return false, ""
 	}
-	return format
+	return true, format
 }

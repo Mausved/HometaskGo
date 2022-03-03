@@ -10,8 +10,8 @@ import (
 
 func Calculator(input string) float64 {
 	isRestricted, err := regexp.MatchString(restrictedSymbolsPattern, input)
-	formatted := toFormat(&input)
-	if err != nil || isRestricted || formatted == "" {
+	success, formatted := toFormat(input)
+	if !success || err != nil || isRestricted || formatted == "" {
 		return math.NaN()
 	}
 	stringStack := stack.Stack{}
