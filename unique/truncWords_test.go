@@ -67,3 +67,35 @@ func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
 
 	require.Equal(t, expected, truncWords(input, opts), message)
 }
+
+func TestEmptyStringsOneWordLeft(t *testing.T) {
+	const message = "Test with empty trunc."
+	opts := Options{
+		Count:       false,
+		Double:      false,
+		Uniq:        false,
+		Insensitive: false,
+		NumFields:   1,
+		NumChars:    0,
+	}
+	input := "this    string   with   empty   words."
+	expected := "string with empty words."
+
+	require.Equal(t, expected, truncWords(input, opts), message)
+}
+
+func TestEmptyStringsTwoWordsLeft(t *testing.T) {
+	const message = "Test with empty trunc."
+	opts := Options{
+		Count:       false,
+		Double:      false,
+		Uniq:        false,
+		Insensitive: false,
+		NumFields:   2,
+		NumChars:    0,
+	}
+	input := "this    string   with   empty   words."
+	expected := "with empty words."
+
+	require.Equal(t, expected, truncWords(input, opts), message)
+}

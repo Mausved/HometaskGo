@@ -25,7 +25,7 @@ func min(x int, y int) int {
 }
 
 func truncWords(currentString string, opts Options) string {
-	words := strings.Split(currentString, Separator)
+	words := strings.Fields(currentString)
 	minWords := min(len(words), opts.NumFields)
 	newString := strings.Join(words[minWords:], Separator)
 	minChars := min(len(newString), opts.NumChars)
@@ -56,7 +56,7 @@ func Uniq(rows []string, opts Options) []string {
 		return nil
 	}
 
-	result := make([]string, 0, len(rows))
+	result := make([]string, 0)
 	currentCount := 1
 	currentRow := rows[0]
 
