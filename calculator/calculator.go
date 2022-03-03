@@ -5,6 +5,7 @@ import (
 	"github.com/cstockton/go-conv"
 	"math"
 	"regexp"
+	"strings"
 )
 
 func Calculator(input string) float64 {
@@ -40,19 +41,22 @@ func Calculator(input string) float64 {
 }
 
 const (
-	restrictedSymbols        = "a-zA-Z,!@#$%^&~=|\\;:<>?_ "
-	restrictedSymbolsPattern = "[" + restrictedSymbols + "]"
-	minus                    = "-"
-	plus                     = "+"
-	multiply                 = "*"
-	div                      = "/"
-	operators                = minus + plus + multiply + div
-	openBrackets             = "({["
-	closeBrackets            = ")}]"
-	brackets                 = openBrackets + closeBrackets
-	digits                   = "0123456789"
-	notDigits                = operators + brackets
+	minus         = "-"
+	plus          = "+"
+	multiply      = "*"
+	div           = "/"
+	operators     = minus + plus + multiply + div
+	openBrackets  = "({["
+	closeBrackets = ")}]"
+	brackets      = openBrackets + closeBrackets
+	digits        = "0123456789"
+	notDigits     = operators + brackets
 )
+
+var escapedOperators = "\\" + strings.Join(strings.Split(operators, ""), "\\")
+var escapedBrackets = "\\" + strings.Join(strings.Split(brackets, ""), "\\")
+var allowedSymbols = digits + escapedOperators + escapedBrackets + "."
+var restrictedSymbolsPattern = "[^" + allowedSymbols + "]"
 
 func Sum(operands ...interface{}) float64 {
 	result := 0.
