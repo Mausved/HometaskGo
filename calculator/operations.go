@@ -40,9 +40,9 @@ func isDigit(symbol string) bool {
 }
 
 const (
-	maxPriority = 3
-	midPriority = 2
-	minPriority = 1
+	minPriority = iota
+	midPriority
+	maxPriority
 )
 
 func getPriority(operator string) int {
