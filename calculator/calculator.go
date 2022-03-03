@@ -51,11 +51,12 @@ const (
 	brackets      = openBrackets + closeBrackets
 	digits        = "0123456789"
 	notDigits     = operators + brackets
+	dot           = "."
 )
 
 var escapedOperators = "\\" + strings.Join(strings.Split(operators, ""), "\\")
 var escapedBrackets = "\\" + strings.Join(strings.Split(brackets, ""), "\\")
-var allowedSymbols = digits + escapedOperators + escapedBrackets + "."
+var allowedSymbols = digits + escapedOperators + escapedBrackets + dot
 var restrictedSymbolsPattern = "[^" + allowedSymbols + "]"
 
 func Sum(operands ...interface{}) float64 {
