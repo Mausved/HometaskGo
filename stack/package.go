@@ -2,7 +2,7 @@ package stack
 
 type Stack []interface{}
 
-func (stack *Stack) IsEmpty() bool {
+func (stack Stack) IsEmpty() bool {
 	return stack.size() == 0
 }
 
@@ -10,8 +10,8 @@ func (stack *Stack) Push(val interface{}) {
 	*stack = append(*stack, val)
 }
 
-func (stack *Stack) size() int {
-	return len(*stack)
+func (stack Stack) size() int {
+	return len(stack)
 }
 
 func (stack *Stack) Pop() {
@@ -20,8 +20,8 @@ func (stack *Stack) Pop() {
 	}
 }
 
-func (stack *Stack) GetTop() interface{} {
-	return (*stack)[stack.size()-1]
+func (stack Stack) GetTop() interface{} {
+	return stack[stack.size()-1]
 }
 
 // PourStackToSlice will be zero-size Stack

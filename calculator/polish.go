@@ -6,9 +6,9 @@ import (
 	"strings"
 )
 
-func CountReversePolishNotation(polish *[]string) float64 {
+func CountReversePolishNotation(polish []string) float64 {
 	floatStack := stack.Stack{}
-	for _, element := range *polish {
+	for _, element := range polish {
 		if !isOperator(element) {
 			number, _ := strconv.ParseFloat(element, 64)
 			floatStack.Push(number)

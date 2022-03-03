@@ -11,11 +11,11 @@ func checkLast(lastSymbol string, operator string) string {
 	return ""
 }
 
-func toFormat(str *string) string {
+func toFormat(str string) (bool, string) {
 	brackets := 0
 	prevOperator := ""
 	format := ""
-	slice := strings.Split(*str, "")
+	slice := strings.Split(str, "")
 	for idx, word := range slice {
 		if isOperator(word) {
 			currOperator := word
