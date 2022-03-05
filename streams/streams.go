@@ -14,7 +14,7 @@ func GetReadyInput() io.Reader {
 		f, err := os.Open(inputFile)
 		if err != nil {
 			fmt.Println("Error opening file: err:", err)
-			os.Exit(1)
+			return nil
 		}
 		return f
 	}
@@ -27,7 +27,7 @@ func GetReadyOutput() io.Writer {
 		f, err := os.Create(outputFile)
 		if err != nil {
 			fmt.Println("Error creating file: err:", err)
-			os.Exit(1)
+			return nil
 		}
 		return f
 	}

@@ -19,18 +19,24 @@ func main() {
 	}
 
 	// prepare buffers
-	buffer := bufio.NewScanner(streams.GetReadyInput())
-	output := bufio.NewWriter(streams.GetReadyOutput())
-	text := streams.ReadAllFile(buffer)
+	input := streams.GetReadyInput()
+	output := streams.GetReadyOutput()
+	if input == nil || output == nil {
+		fmt.Println("Error to get buffers.")
+		return
+	}
+	scanner := bufio.NewScanner(input)
+	writer := bufio.NewWriter(output)
+	text := streams.ReadAllFile(scanner)
 
 	result := unique.Uniq(text, opts)
-	_, err := output.WriteString(strings.Join(result, "\n"))
+	_, err := writer.WriteString(strings.Join(result, "\n"))
 	if err != nil {
-		fmt.Println("Error to writing to output: err: ", err)
+		fmt.Println("Error to writing to writer: err: ", err)
 
 	}
 
-	errFlush := output.Flush()
+	errFlush := writer.Flush()
 	if errFlush != nil {
 		fmt.Println("Error to flush: err: ", errFlush)
 		return
