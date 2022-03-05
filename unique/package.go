@@ -24,7 +24,7 @@ func min(x int, y int) int {
 	}
 }
 
-func truncWords(currentString string, opts Options) string {
+func truncRow(currentString string, opts Options) string {
 	words := strings.Fields(currentString)
 	minWords := min(len(words), opts.NumFields)
 	newString := strings.Join(words[minWords:], Separator)
@@ -66,7 +66,7 @@ func Uniq(rows []string, opts Options) []string {
 	}
 
 	for idx, nextRow := range rows[1:] {
-		if strings.EqualFold(truncWords(nextRow, opts), truncWords(currentRow, opts)) {
+		if strings.EqualFold(truncRow(nextRow, opts), truncRow(currentRow, opts)) {
 			currentCount++
 		} else {
 			result = addRow(result, currentCount, currentRow, opts)

@@ -17,7 +17,7 @@ func TestWithoutFields(t *testing.T) {
 	}
 	input := "there're three words."
 	expected := input
-	require.Equal(t, expected, truncWords(input, opts), message)
+	require.Equal(t, expected, truncRow(input, opts), message)
 }
 
 func TestTrunc1Word(t *testing.T) {
@@ -33,7 +33,7 @@ func TestTrunc1Word(t *testing.T) {
 	input := "there're three words."
 	expected := "three words."
 
-	require.Equal(t, expected, truncWords(input, opts), message)
+	require.Equal(t, expected, truncRow(input, opts), message)
 }
 
 func TestTruncAll(t *testing.T) {
@@ -49,7 +49,7 @@ func TestTruncAll(t *testing.T) {
 	input := "there're three words."
 	expected := ""
 
-	require.Equal(t, expected, truncWords(input, opts), message)
+	require.Equal(t, expected, truncRow(input, opts), message)
 }
 
 func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
@@ -65,7 +65,7 @@ func TestNumFieldsMoreThanNumberOfWords(t *testing.T) {
 	input := "this test is check correctly behavior NumFields more the number of words in this string."
 	expected := ""
 
-	require.Equal(t, expected, truncWords(input, opts), message)
+	require.Equal(t, expected, truncRow(input, opts), message)
 }
 
 func TestEmptyStringsOneWordLeft(t *testing.T) {
@@ -81,7 +81,7 @@ func TestEmptyStringsOneWordLeft(t *testing.T) {
 	input := "this    string   with   empty   words."
 	expected := "string with empty words."
 
-	require.Equal(t, expected, truncWords(input, opts), message)
+	require.Equal(t, expected, truncRow(input, opts), message)
 }
 
 func TestEmptyStringsTwoWordsLeft(t *testing.T) {
@@ -97,5 +97,5 @@ func TestEmptyStringsTwoWordsLeft(t *testing.T) {
 	input := "this    string   with   empty   words."
 	expected := "with empty words."
 
-	require.Equal(t, expected, truncWords(input, opts), message)
+	require.Equal(t, expected, truncRow(input, opts), message)
 }
