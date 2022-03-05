@@ -19,12 +19,18 @@ func main() {
 	}
 
 	// prepare buffers
-	input := streams.GetReadyInput()
-	output := streams.GetReadyOutput()
-	if input == nil || output == nil {
-		fmt.Println("Error to get buffers.")
+	input, getInputErr := streams.GetReadyInput()
+	if getInputErr != nil {
+		fmt.Println("Error to get input buffer: err:", getInputErr)
 		return
 	}
+
+	output, getOutputErr := streams.GetReadyOutput()
+	if getOutputErr != nil {
+		fmt.Println("Error to get input buffer: err:", getOutputErr)
+		return
+	}
+
 	scanner := bufio.NewScanner(input)
 	writer := bufio.NewWriter(output)
 	text := streams.ReadAllFile(scanner)

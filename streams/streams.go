@@ -3,35 +3,32 @@ package streams
 import (
 	"bufio"
 	"flag"
-	"fmt"
 	"io"
 	"os"
 )
 
-func GetReadyInput() io.Reader {
+func GetReadyInput() (io.Reader, error) {
 	inputFile := flag.Arg(0)
 	if inputFile != "" {
 		f, err := os.Open(inputFile)
 		if err != nil {
-			fmt.Println("Error opening file: err:", err)
-			return nil
+			return nil, err
 		}
-		return f
+		return f, nil
 	}
-	return os.Stdin
+	return os.Stdin, nil
 }
 
-func GetReadyOutput() io.Writer {
+func GetReadyOutput() (io.Writer, error) {
 	outputFile := flag.Arg(1)
 	if outputFile != "" {
 		f, err := os.Create(outputFile)
 		if err != nil {
-			fmt.Println("Error creating file: err:", err)
-			return nil
+			return nil, err
 		}
-		return f
+		return f, nil
 	}
-	return os.Stdout
+	return os.Stdout, nil
 }
 
 func ReadAllFile(buffer *bufio.Scanner) []string {
