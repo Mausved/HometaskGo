@@ -41,11 +41,7 @@ func writeRow(currentCount int, currentRow string, opts Options) string {
 }
 
 func addRow(result []string, currentCount int, currentRow string, opts Options) []string {
-	if opts.Uniq {
-		if currentCount == 1 {
-			return append(result, writeRow(currentCount, currentRow, opts))
-		}
-	} else if !opts.Double || opts.Double && currentCount > 1 {
+	if (opts.Uniq && currentCount == 1) || (!opts.Uniq && (!opts.Double || opts.Double && currentCount > 1)) {
 		return append(result, writeRow(currentCount, currentRow, opts))
 	}
 	return result
