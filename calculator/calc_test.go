@@ -42,7 +42,7 @@ func TestNanSums(t *testing.T) {
 
 func TestStandardMultiply(t *testing.T) {
 	require.Equal(t, 5., Calculator("1.25*4"), "1.25*4=5")
-	require.Equal(t, 3.33, Calculator("1.111*3"), "1.111*3=3.33")
+	require.Equal(t, 3.333, Calculator("1.111*3"), "1.111*3=3.33")
 	require.Equal(t, 0., Calculator("-2*0"), "-2*0=0")
 	require.Equal(t, 0., Calculator("2*0"), "2*0=0")
 	require.Equal(t, 4., Calculator("2*2"), "2*2=4")
@@ -66,8 +66,8 @@ func TestDiv(t *testing.T) {
 	require.Equal(t, 1.5, Calculator("3/2"), "3/2=1.5")
 	require.Equal(t, 2., Calculator("4/2"), "4/2=2")
 	require.Equal(t, 10., Calculator("100/10"), "100/10=10")
-	require.Equal(t, 0.5, Calculator("24.05/47.69"), "24.05/47.69=0.5")
-	require.Equal(t, 0.51, Calculator("24.05/47.69+0.001"), "24.05/47.69+0.001=0.51")
+	require.Equal(t, 0.504298595093311, Calculator("24.05/47.69"), "24.05/47.69=0.5")
+	require.Equal(t, 0.505298595093311, Calculator("24.05/47.69+0.001"), "24.05/47.69+0.001=0.51")
 	require.Equal(t, -1., Calculator("-2/2"), "-2/2=-1")
 	require.Equal(t, -1., Calculator("2/(-2)"), "2/(-2)=1")
 }
@@ -88,6 +88,6 @@ func Test(t *testing.T) {
 	require.Equal(t, 10., Calculator("2+2*4"), "2+2*4 = 10")
 	require.Equal(t, 0., Calculator("(2-2)*4"), "(2-2)*4 = 0")
 	require.Equal(t, 0., Calculator("(2-2)*4/4"), "(2-2)*4/4 = 0")
-	require.Equal(t, 345.68, Calculator("1.43*(-2.0553/9.523)+99.99+123*2"), "1.43*(-2.0553/9.523)+99.99+123*2=345.68")
-	require.Equal(t, 347.69, Calculator("1.43*(-2.0553/9.523)+99.99+123*2+2.004"), "1.43*(-2.0553/9.523)+99.99+123*2+2.004=347.69")
+	require.Equal(t, 345.6813704714901, Calculator("1.43*(-2.0553/9.523)+99.99+123*2"), "1.43*(-2.0553/9.523)+99.99+123*2=345.68")
+	require.Equal(t, 347.6853704714901, Calculator("1.43*(-2.0553/9.523)+99.99+123*2+2.004"), "1.43*(-2.0553/9.523)+99.99+123*2+2.004=347.69")
 }

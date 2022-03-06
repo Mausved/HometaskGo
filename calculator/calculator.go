@@ -37,7 +37,7 @@ func Calculator(input string) float64 {
 		polish = append(polish, stringStack.GetTop().(string))
 		stringStack.Pop()
 	}
-	return math.Round(CountReversePolishNotation(polish)*100) / 100
+	return CountReversePolishNotation(polish)
 }
 
 const (
