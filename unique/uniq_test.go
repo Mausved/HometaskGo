@@ -36,7 +36,9 @@ I love music of Kartik.`
 	}
 
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqWithParamC(t *testing.T) {
@@ -69,7 +71,9 @@ I love music of Kartik.`
 	}
 
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqWithParamD(t *testing.T) {
@@ -100,7 +104,9 @@ I love music of Kartik.`
 	}
 
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqWithParamU(t *testing.T) {
@@ -130,7 +136,9 @@ I love music of Kartik.`
 	}
 
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqWithParamI(t *testing.T) {
@@ -163,7 +171,9 @@ I love MuSIC of Kartik.`
 	}
 
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqWithParamF(t *testing.T) {
@@ -192,7 +202,9 @@ Thanks.`
 		`Thanks.`,
 	}
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqWithParamS(t *testing.T) {
@@ -222,7 +234,9 @@ Thanks.`
 		`Thanks.`,
 	}
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqOneRowInput(t *testing.T) {
@@ -239,7 +253,9 @@ func TestUniqOneRowInput(t *testing.T) {
 	input := "1"
 	expected := []string{"1"}
 	inputSlice := strings.Split(input, "\n")
-	require.Equal(t, expected, Uniq(inputSlice, opts), message)
+	actual, err := Uniq(inputSlice, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }
 
 func TestUniqEmptyInput(t *testing.T) {
@@ -255,5 +271,7 @@ func TestUniqEmptyInput(t *testing.T) {
 
 	var input []string
 	var expected []string = nil
-	require.Equal(t, expected, Uniq(input, opts), message)
+	actual, err := Uniq(input, opts)
+	require.Equal(t, expected, actual, message)
+	require.Equal(t, nil, err)
 }

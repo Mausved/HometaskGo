@@ -13,10 +13,6 @@ var opts unique.Options
 
 func main() {
 	flag.Parse()
-	if opts.Uniq && opts.Double || opts.Uniq && opts.Count || opts.Double && opts.Count {
-		flag.PrintDefaults()
-		return
-	}
 
 	// prepare buffers
 	input, getInputErr := streams.GetReadyInput()
@@ -35,15 +31,18 @@ func main() {
 	writer := bufio.NewWriter(output)
 	text := streams.ReadAllFile(scanner)
 
-	result := unique.Uniq(text, opts)
-	_, err := writer.WriteString(strings.Join(result, "\n"))
-	if err != nil {
+	result, errorFlags := unique.Uniq(text, opts)
+	if errorFlags != nil {
+		flag.PrintDefaults()
+		return
+	}
+
+	if _, err := writer.WriteString(strings.Join(result, "\n")); err != nil {
 		fmt.Println("Error to writing to writer: err: ", err)
 
 	}
 
-	errFlush := writer.Flush()
-	if errFlush != nil {
+	if errFlush := writer.Flush(); errFlush != nil {
 		fmt.Println("Error to flush: err: ", errFlush)
 		return
 	}
