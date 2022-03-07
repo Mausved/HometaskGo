@@ -47,9 +47,8 @@ func main() {
 		return
 	}
 
-	if _, err := writer.WriteString(strings.Join(result, "\n")); err != nil {
+	if _, err := writer.WriteString(strings.Join(result, "\n") + "\n"); err != nil {
 		fmt.Println("Error to writing to writer: err: ", err)
-
 	}
 
 	if errFlush := writer.Flush(); errFlush != nil {
