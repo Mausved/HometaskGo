@@ -7,7 +7,9 @@ import (
 	"os"
 )
 
-func GetReadyInput() (io.Reader, func() error, error) {
+type CloseFunc = func() error
+
+func GetReadyInput() (io.Reader, CloseFunc, error) {
 	inputFile := flag.Arg(0)
 	if inputFile != "" {
 		f, err := os.Open(inputFile)
@@ -20,7 +22,7 @@ func GetReadyInput() (io.Reader, func() error, error) {
 	return os.Stdin, nil, nil
 }
 
-func GetReadyOutput() (io.Writer, func() error, error) {
+func GetReadyOutput() (io.Writer, CloseFunc, error) {
 	outputFile := flag.Arg(1)
 	if outputFile != "" {
 		f, err := os.Create(outputFile)
