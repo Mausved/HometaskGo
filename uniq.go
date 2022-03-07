@@ -15,13 +15,23 @@ func main() {
 	flag.Parse()
 
 	// prepare buffers
-	input, getInputErr := streams.GetReadyInput()
+	input, closeInput, getInputErr := streams.GetReadyInput()
+	defer func() {
+		if closeInput != nil {
+			closeInput()
+		}
+	}()
 	if getInputErr != nil {
 		fmt.Println("Error to get input buffer: err:", getInputErr)
 		return
 	}
 
-	output, getOutputErr := streams.GetReadyOutput()
+	output, closeOutput, getOutputErr := streams.GetReadyOutput()
+	defer func() {
+		if closeOutput != nil {
+			closeOutput()
+		}
+	}()
 	if getOutputErr != nil {
 		fmt.Println("Error to get input buffer: err:", getOutputErr)
 		return
@@ -30,8 +40,8 @@ func main() {
 	scanner := bufio.NewScanner(input)
 	writer := bufio.NewWriter(output)
 	text := streams.ReadAllFile(scanner)
-
 	result, errorFlags := unique.Uniq(text, opts)
+
 	if errorFlags != nil {
 		flag.PrintDefaults()
 		return
