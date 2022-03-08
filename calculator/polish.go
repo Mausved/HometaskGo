@@ -24,7 +24,7 @@ func CountReversePolishNotation(polish []string) float64 {
 			floatStack.Push(getOperation(LeftOperand, RightOperand, operator))
 		}
 	}
-	return Sum(floatStack.PourStackToSlice()...)
+	return Sum(floatStack.ToSlice()...)
 }
 
 func makeNumber(str string) string {
