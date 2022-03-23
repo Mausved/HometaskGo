@@ -27,7 +27,6 @@ func GetReadyOutput() (io.Writer, CloseFunc, error) {
 	if outputFile != "" {
 		f, err := os.Create(outputFile)
 		if err != nil {
-			f.Close()
 			return nil, nil, err
 		}
 		return f, f.Close, nil
