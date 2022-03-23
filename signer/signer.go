@@ -67,26 +67,25 @@ func countSingleHash(singleWg *sync.WaitGroup, out chan interface{}, dataFromCha
 	inputData := strconv.Itoa(dataFromChan.(int))
 
 	// DataSignerCrc32 counting
-	crcDataOut := make(chan string)
+	crcDataOut := make(chan string, MaxInputDataLen)
 	go func(out chan string, inputData string) {
 		out <- DataSignerCrc32(inputData)
+		close(crcDataOut)
 	}(crcDataOut, inputData)
 
 	// crcMd5Data counting
-	crcMd5DataOut := make(chan string)
+	crcMd5DataOut := make(chan string, MaxInputDataLen)
 	go func(out chan string, inputData string, md5mutex *sync.Mutex) {
 		md5mutex.Lock()
 		md5Data := DataSignerMd5(inputData)
 		md5mutex.Unlock()
 		crcMd5Data := DataSignerCrc32(md5Data)
 		out <- crcMd5Data
+		close(crcMd5DataOut)
 	}(crcMd5DataOut, inputData, md5mutex)
 
 	crcData := <-crcDataOut
 	crcMd5Data := <-crcMd5DataOut
-
-	close(crcDataOut)
-	close(crcMd5DataOut)
 
 	out <- strings.Join([]string{crcData, crcMd5Data}, separator)
 }
