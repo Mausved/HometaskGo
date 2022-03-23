@@ -85,6 +85,9 @@ func countSingleHash(singleWg *sync.WaitGroup, out chan interface{}, dataFromCha
 	crcData := <-crcDataOut
 	crcMd5Data := <-crcMd5DataOut
 
+	close(crcDataOut)
+	close(crcMd5DataOut)
+
 	out <- strings.Join([]string{crcData, crcMd5Data}, separator)
 }
 
