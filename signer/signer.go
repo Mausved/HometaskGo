@@ -13,12 +13,10 @@ func ExecutePipeline(jobs ...job) {
 	wg := &sync.WaitGroup{}
 	var in chan interface{} = nil
 	out := make(chan interface{}, MaxInputDataLen)
-	for idx, currJob := range jobs {
+	for _, currJob := range jobs {
 		wg.Add(1)
-		if idx != 0 {
-			in = out
-			out = make(chan interface{}, MaxInputDataLen)
-		}
+		in = out
+		out = make(chan interface{}, MaxInputDataLen)
 		go func(currJob job, wg *sync.WaitGroup, in chan interface{}, out chan interface{}) {
 			defer wg.Done()
 			currJob(in, out)
